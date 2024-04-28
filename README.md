@@ -19,3 +19,14 @@ Poszczególne wymagania
 9. Przechodzenie na inną planszępo wejściu na jakiś znak na mapie (schody, drabina czy drzwi na krańcach aktualnej planszy)
 10. Walka/zadanie wymagające minigry, np. ciepło-zimno, kamień-papier-nożyce itp.
 11. Coś dodatkowego ambitnego spoza tej listy (np. proceduralnie generowane poziomy)
+
+############################################################################################################################
+
+Polecam stosować jednolite nazewnictwo commitów -> [https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13](url)
+
+Generowanie assetów do build & debug
+1. Zaznaczamy Program.cs (explorator w VSCode)
+2. Klikamy "F1"
+3. Wpisujemy "Gen"... -> powinna wyskoczyć podpowiedź uzupełniająca "Generate Assets for Build and Debug"
+4. Zatwierdzić komendę kliknięciem
+5. (opcjonalnie) w .vscode/launch.json przy parametrze "console" zmienić wartość na "externalTerminal"
