@@ -4,7 +4,7 @@ namespace projekt
 {
     class VisualRepresentation
     {
-        char character;
+        public char character;
         ConsoleColor displayColor;
         ConsoleColor backgroundColor;
 

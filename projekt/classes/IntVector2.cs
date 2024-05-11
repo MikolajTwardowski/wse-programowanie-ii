@@ -24,7 +24,7 @@ namespace projekt
         public static IntVector2 operator -(IntVector2 a) => new IntVector2(-a.x, -a.y);
 
         public static IntVector2 operator +(IntVector2 a, IntVector2 b)
-        => new IntVector2(a.x * b.x, a.y + b.y);
+        => new IntVector2(a.x + b.x, a.y + b.y);
 
         public static IntVector2 operator -(IntVector2 a, IntVector2 b)
         => a + (-b);

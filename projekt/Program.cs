@@ -7,32 +7,45 @@ namespace projekt // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            while(true)
-            {
-            Console.Clear();
-            //WindowDrawTest();
-            //actor.Display();
             Scene mainScene = new Scene();
-            
+
             Actor player = new Actor(
                 new VisualRepresentation('#', ConsoleColor.DarkRed, ConsoleColor.Yellow), 
                 new Transform(new IntVector2(5,5)));
 
             Actor actor1 = new Actor(
-                new VisualRepresentation('#', ConsoleColor.Red, ConsoleColor.White), 
+                new VisualRepresentation('@', ConsoleColor.Red, ConsoleColor.White), 
                 new Transform(new IntVector2(10,10)));
 
             Actor actor2 = new Actor(
-                new VisualRepresentation('#', ConsoleColor.Yellow, ConsoleColor.Red), 
+                new VisualRepresentation('%', ConsoleColor.Yellow, ConsoleColor.Red), 
                 new Transform(new IntVector2(0,0)));
 
             mainScene.AddActor(player);
             mainScene.AddActor(actor1);
             mainScene.AddActor(actor2);
 
+            while(true)
+            {
+            //WindowDrawTest();
+            //actor.Display();
+
             Camera.Instance.RenderScene(mainScene);
 
-            Console.ReadKey();
+            ConsoleKey keyInfo = Console.ReadKey().Key;
+
+            if(keyInfo == ConsoleKey.UpArrow || keyInfo == ConsoleKey.W)
+                Camera.Instance.offset += IntVector2.Up;
+
+            if(keyInfo == ConsoleKey.DownArrow || keyInfo == ConsoleKey.S)
+                Camera.Instance.offset += IntVector2.Down;
+
+            if(keyInfo == ConsoleKey.RightArrow || keyInfo == ConsoleKey.D)
+                Camera.Instance.offset += IntVector2.Right;
+
+            if(keyInfo == ConsoleKey.LeftArrow || keyInfo == ConsoleKey.A)
+                Camera.Instance.offset += IntVector2.Left;
+
             }
         }
 
