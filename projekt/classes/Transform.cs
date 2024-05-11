@@ -11,14 +11,8 @@ namespace projekt
             this.Position = position;
         }
         
-        public void SetNewPosition(IntVector2 position)
-        {
-            this.Position = position;
-        }
+        public void SetNewPosition(IntVector2 position) => this.Position = position;
 
-        public void Move(IntVector2 vector)
-        {
-            Position += vector;
-        }
+        public void Move(IntVector2 vector) => Position += vector;
     }
 }

@@ -18,6 +18,7 @@ namespace projekt
         {
             this.x = x;
             this.y = y;
+
         }
 
         public static IntVector2 operator +(IntVector2 a) => a;
@@ -29,10 +30,12 @@ namespace projekt
         public static IntVector2 operator -(IntVector2 a, IntVector2 b)
         => a + (-b);
 
+        
         public static bool operator ==(IntVector2 a, IntVector2 b)
         => (a.x == b.x && a.y == b.y);
 
         public static bool operator !=(IntVector2 a, IntVector2 b)
         => !(a == b);
+        
     }
 }

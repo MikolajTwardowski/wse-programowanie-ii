@@ -4,15 +4,7 @@ namespace projekt
 {
     class Scene
     {
-
-
         public List<Actor> actors {get; private set;} = new List<Actor>();
-
-        public Scene()
-        {
-
-        
-        }
 
         public void AddActor(Actor actor)
         {

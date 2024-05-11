@@ -12,7 +12,5 @@ namespace projekt
             this.visualRepresentation = visualRepresentation;
             this.transform = transform;
         }
-
-
     }
 }

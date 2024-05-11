@@ -27,18 +27,8 @@ namespace projekt
             Console.Clear();
             foreach(Actor actor in scene.actors)
             {
-                if(actor.transform.Position.x + offset.x >= 0 && 
-                actor.transform.Position.x + offset.x < Console.WindowWidth && 
-                actor.transform.Position.y + offset.y >= 0 && 
-                actor.transform.Position.y + offset.y< Console.WindowHeight - 1)
-                {
-                    actor.visualRepresentation.TryDisplayAtPosition(actor.transform.Position + offset);
-
-                }
+                actor.visualRepresentation.TryDisplayAtPosition(actor.transform.Position + offset);
             }
-            
-            Console.SetCursorPosition(0, Console.WindowHeight - 1);
-            Console.Write(offset.x + "  " + offset.y);
         }
 
     }
