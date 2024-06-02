@@ -17,8 +17,8 @@ namespace projekt
         #region Transform
         // pozycja
         public IntVector2 position {get; private set;}
-        // zmiana pozycji?
-
+        // zmiana pozycji - bo trzeba będzie teleportować przy przejściach
+        public void SetNewPosition(IntVector2 position) => this.position = position;
         // dodaj wektor do pozycji
         void Move(IntVector2 vector) => position += vector; // to powinno być w innej formie - nie możesz iść bez sprawdzenia pozycji
 
@@ -27,11 +27,11 @@ namespace projekt
             GameObject other;
             if(Program.CheckCollisionOn(position + vector, out other))
             {
-                Move(vector);
+                OnCollisionEnter(other);
             }
             else
             {
-                OnCollisionEnter(other);
+                Move(vector);
             }
         }
 
@@ -66,6 +66,7 @@ namespace projekt
         #endregion
 
         #region IndividualLogic
+        // wlogika kolizji
         public virtual void OnCollisionEnter(GameObject other){}
 
         // Update
