@@ -66,8 +66,8 @@ namespace projekt
         #endregion
 
         #region IndividualLogic
-        // wlogika kolizji
-        public virtual void OnCollisionEnter(GameObject other){}
+        // logika kolizji (ten obiekt natrafia na inny podczas próby ruchu)
+        protected virtual void OnCollisionEnter(GameObject other){}
 
         // Update
         public virtual void Update(){}

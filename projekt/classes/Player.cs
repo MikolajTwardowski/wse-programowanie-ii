@@ -10,7 +10,7 @@ namespace projekt
             ConsoleColor foreground = ConsoleColor.White) : base(position, visualReprezentation, background, foreground)
         {}
 
-        public override void OnCollisionEnter(GameObject other)
+        protected override void OnCollisionEnter(GameObject other)
         {
             if(other is Wall)
             {

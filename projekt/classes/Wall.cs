@@ -12,7 +12,7 @@ namespace projekt
 
         }
 
-        public override void OnCollisionEnter(GameObject other)
+        protected override void OnCollisionEnter(GameObject other)
         {
             
         }
