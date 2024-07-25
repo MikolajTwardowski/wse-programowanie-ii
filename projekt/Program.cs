@@ -15,6 +15,11 @@ namespace projekt // Note: actual namespace depends on the project name.
                 forcePlayerDeath = false;
                 Wall wall1 = new Wall(new Transform(10,3));
 
+                Bandit b1, b2, b3;
+                b1 = new Bandit(new Transform(14, 25), new IntVector2(14 + 5, 25 + 3));
+                b2 = new Bandit(new Transform(70, 25), new IntVector2(70 - 5, 25 -3));
+                b3 = new Bandit(new Transform(70, 3), new IntVector2(70, 13));
+
                 Dummie d1, d2, d3;
                 d1 = new Dummie(new Transform(14, 6));
                 d2 = new Dummie(new Transform(14, 7));

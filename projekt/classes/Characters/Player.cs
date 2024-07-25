@@ -22,7 +22,7 @@ namespace projekt
             this.hitpoints = 3;
             this.damage = 3;
             this.defence = 2;
-
+            
             visual.SetVisualRepresentation('P');
             visual.SetForeground(ConsoleColor.White);
         }

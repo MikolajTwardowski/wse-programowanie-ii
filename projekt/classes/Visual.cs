@@ -23,6 +23,7 @@ namespace projekt
         public void SetVisualRepresentation(char newVisual) => visualReprezentation = newVisual;
         public void SetBackground(ConsoleColor newColor) => background = newColor;
         public void SetForeground(ConsoleColor newColor) => foreground = newColor;
+
     }
 
 }
