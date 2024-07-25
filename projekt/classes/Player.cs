@@ -2,24 +2,49 @@ using System;
 
 namespace projekt
 {
-    class Player : GameObject
+    class Player : Character, IUpdatable
     {
-        public Player(IntVector2 position, 
-            char visualReprezentation = 'P', 
-            ConsoleColor background = ConsoleColor.Black, 
-            ConsoleColor foreground = ConsoleColor.White) : base(position, visualReprezentation, background, foreground)
-        {}
+        /*
+        public Player() : base()
+        {
+            //this.isAggressive = false;
+            this._isAggressive = false;
+            this.maxHitpoints = 5;
+            this.hitpoints = maxHitpoints;
+            this.damage = 3;
+            this.defence = 2;
+
+            visual.SetVisualRepresentation('P');
+            visual.SetForeground(ConsoleColor.White);
+        } */
+
+        public Player(Transform transform) : base(transform)
+        {
+            this._isAggressive = true;
+            this.maxHitpoints = 5;
+            this.hitpoints = maxHitpoints;
+            this.damage = 3;
+            this.defence = 2;
+
+            visual.SetVisualRepresentation('P');
+            visual.SetForeground(ConsoleColor.White);
+        }
 
         protected override void OnCollisionEnter(GameObject other)
         {
-            if(other is Wall)
+            if(other is Character character)
             {
-                Console.Write("\nOjej, ściana. ");
-                Console.ReadKey(true);
+                if(character.isAggressive)
+                {
+                    Attack(character);
+                }
+                else
+                {
+                    Talk(character);
+                }
             }
-            //else if (other is ...)
         }
-        public override void Update()
+        public void Update()
         {
             ConsoleKey playerInput = Console.ReadKey(true).Key;
 
