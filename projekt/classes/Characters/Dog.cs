@@ -18,7 +18,8 @@ namespace projekt
 
         public void Update()
         {
-            TryMove(IntVector2.Right);
+            
+            TryMove(IntVector2.Down);
         }
     }
 

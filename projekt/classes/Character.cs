@@ -35,7 +35,7 @@ namespace projekt
                 _hitpoints = value;
                 if(_hitpoints <= 0)
                 {
-                    OnDeath();
+                    
                 }
             }
         }
@@ -78,11 +78,6 @@ namespace projekt
             Console.ReadKey(true);
         }
 
-        protected virtual void OnDeath()
-        {
-            //Program.objects.Remove(this);
-        }
-
         protected void TryMove(IntVector2 vector)
         {
             int index;
@@ -114,7 +109,10 @@ namespace projekt
                         Talk(character);
                     }
                 }
-
+            }
+            else if (other is Teleport teleport)
+            {
+                transform.SetNewPosition(teleport.destination);
             }
         }
 
