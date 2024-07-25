@@ -37,8 +37,8 @@ namespace projekt
             }
             else // kierunek w stronę skarbu
             {
-                deltaX = tresurePos.x - transform.position.x;
-                deltaY = tresurePos.y - transform.position.y;
+                deltaX = tresurePos.x + r.Next(-2, 3) - transform.position.x;
+                deltaY = tresurePos.y + r.Next(-2, 3) - transform.position.y;
             }
 
 
