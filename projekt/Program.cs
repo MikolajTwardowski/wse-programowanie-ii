@@ -47,11 +47,9 @@ namespace projekt // Note: actual namespace depends on the project name.
 
                 Console.ReadKey(true);
 
-
                 int seed = random.Next();
                 random = new Random(seed);
 
-                // Generowanie mapy
                 int temp;
                 // stopień zapełnienia (5%)
                 for(int i = (int) (Console.WindowWidth * Console.WindowHeight * 0.05); i > 0; i--)
@@ -106,7 +104,7 @@ namespace projekt // Note: actual namespace depends on the project name.
                     }
                 }
 
-                // Pieski zapełnienia (1%)
+                // Pieski zapełnienia (1%) mapy
                 for(int i = (int) (Console.WindowWidth * Console.WindowHeight * 0.01); i > 0; i--)
                 {
                     IntVector2 position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
@@ -183,7 +181,7 @@ namespace projekt // Note: actual namespace depends on the project name.
             Console.CursorVisible = false;
         }
 
-        public static bool CheckCollisionOn(IntVector2 position, out int index) // jeśli tu będzie tlyko game object to mi się wysra przy sprawdzaniu ruchu xD
+        public static bool CheckCollisionOn(IntVector2 position, out int index)
         {
             index = -1;
             foreach(var obj in Program.objects)
@@ -221,43 +219,3 @@ namespace projekt // Note: actual namespace depends on the project name.
 
     }
 }
-
-
-/*  Coby nie zaginęło jakbym potrzebował - do wyczyszczenia później
-
-                Wall wall1 = new Wall(new Transform(10,3));
-
-                Bandit b1, b2, b3;
-                b1 = new Bandit(new Transform(14, 25), new IntVector2(14 + 5, 25 + 3));
-                b2 = new Bandit(new Transform(70, 25), new IntVector2(70 - 5, 25 -3));
-                b3 = new Bandit(new Transform(70, 3), new IntVector2(70, 13));
-
-                Dummie d1, d2, d3;
-                d1 = new Dummie(new Transform(14, 6));
-                d2 = new Dummie(new Transform(14, 7));
-                d3 = new Dummie(new Transform(14, 8));
-
-                Sword s1, s2, s3;
-                s1 = new Sword(new Transform(50, 6));
-                s2 = new Sword(new Transform(50, 7));
-                s3 = new Sword(new Transform(50, 8));
-
-                Helmet h1, h2, h3;
-                h1 = new Helmet(new Transform(52, 6));
-                h2 = new Helmet(new Transform(52, 7));
-                h3 = new Helmet(new Transform(52, 8));
-
-                Potion p1, p2, p3;
-                p1 = new Potion(new Transform(54, 6));
-                p2 = new Potion(new Transform(54, 7));
-                p3 = new Potion(new Transform(54, 8));
-
-                Trap t1, t2, t3;
-                t1 = new Trap(new Transform(56, 6));
-                t2 = new Trap(new Transform(56, 7));
-                t3 = new Trap(new Transform(56, 8));
-
-                Teleport teleport = new Teleport(new Transform((int)Console.WindowWidth/2, (int)Console.WindowHeight/2 - 1), new IntVector2(48, 6));
-                
-                Dog doggo = new Dog(new Transform(56, 3));
-*/

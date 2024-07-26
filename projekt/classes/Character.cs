@@ -33,7 +33,7 @@ namespace projekt
             set
             {
                 _hitpoints = value;
-                if(_hitpoints <= 0)
+                if(_hitpoints <= 0) // ostatecznie nie używane, ale można dorobić spawnowanie / przenoszenie przedmiotów po śmierci pod pozycję pokonanego
                 {
 
                 }
