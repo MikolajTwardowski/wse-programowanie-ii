@@ -5,49 +5,134 @@ namespace projekt // Note: actual namespace depends on the project name.
     internal class Program
     {
         public static List<GameObject> objects = new List<GameObject>();
-        public static bool forcePlayerDeath = false;
         public static Player player = new Player(new Transform(new IntVector2((int)Console.WindowWidth/2, (int)Console.WindowHeight/2)));
 
+        public static Random random = new Random();
         static void Main(string[] args)
         {
             while(true)
             {
-                forcePlayerDeath = false;
-                Wall wall1 = new Wall(new Transform(10,3));
+                // bad tutorial xD
+                Console.Clear();
+                Console.SetCursorPosition(0,0);
+                Console.WriteLine("Witamy Cię w tym dzikim rogueliku! ");
+                Console.WriteLine();
+                Console.WriteLine("Sterowanie: ");
+                Console.WriteLine("Idź w Prawo (D) (ArrowRight)");
+                Console.WriteLine("Idź w Lewo (A) (ArrowLeft)");
+                Console.WriteLine("Idź w Góra (W) (ArrowUp)");
+                Console.WriteLine("Idź w Dół (S) (ArrowDown)");
+                Console.WriteLine("Użyj potki na HP (H)");
+                Console.WriteLine("Wyłącz grę (ALT + F4) *tylko windows :P");
+                Console.WriteLine();
+                Console.WriteLine("Jeśli chcesz z czymś wejść w interakcję, to spróbuj na tym stanąć. ");
+                Console.WriteLine();
+                Console.WriteLine("Biały kolor wskazuje postaci neutralne: ");
+                Console.WriteLine("(D) Dog, możesz porozmawiać z pieskiem. ");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Czerwonym kolorem są oznaczeni przeciwnicy. ");
+                Console.WriteLine("(B) Bandit, patroluje okolice swojego skarbu, ale zacznie Cię gonić jeśli się zbliżysz. ");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Żółty to przedmioty: ");
+                Console.WriteLine("(P) Potion na HP");
+                Console.WriteLine("(S) Sword, zwiększa zadawane obrażenia");
+                Console.WriteLine("(H) Helmet, zwiększa pancerz");
+                Console.WriteLine("(T) Trap, tracisz 1 HP");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Są tutaj też (T) Teleporty. \nPrzeniosą Cię na pozycję odbicia pozycji portalu względem środka mapy. ");
+                Console.ResetColor();
 
-                Bandit b1, b2, b3;
-                b1 = new Bandit(new Transform(14, 25), new IntVector2(14 + 5, 25 + 3));
-                b2 = new Bandit(new Transform(70, 25), new IntVector2(70 - 5, 25 -3));
-                b3 = new Bandit(new Transform(70, 3), new IntVector2(70, 13));
+                Console.ReadKey(true);
 
-                Dummie d1, d2, d3;
-                d1 = new Dummie(new Transform(14, 6));
-                d2 = new Dummie(new Transform(14, 7));
-                d3 = new Dummie(new Transform(14, 8));
 
-                Sword s1, s2, s3;
-                s1 = new Sword(new Transform(50, 6));
-                s2 = new Sword(new Transform(50, 7));
-                s3 = new Sword(new Transform(50, 8));
+                int seed = random.Next();
+                random = new Random(seed);
 
-                Helmet h1, h2, h3;
-                h1 = new Helmet(new Transform(52, 6));
-                h2 = new Helmet(new Transform(52, 7));
-                h3 = new Helmet(new Transform(52, 8));
-
-                Potion p1, p2, p3;
-                p1 = new Potion(new Transform(54, 6));
-                p2 = new Potion(new Transform(54, 7));
-                p3 = new Potion(new Transform(54, 8));
-
-                Trap t1, t2, t3;
-                t1 = new Trap(new Transform(56, 6));
-                t2 = new Trap(new Transform(56, 7));
-                t3 = new Trap(new Transform(56, 8));
-
-                Teleport teleport = new Teleport(new Transform((int)Console.WindowWidth/2, (int)Console.WindowHeight/2 - 1), new IntVector2(48, 6));
+                // Generowanie mapy
+                int temp;
+                // stopień zapełnienia (5%)
+                for(int i = (int) (Console.WindowWidth * Console.WindowHeight * 0.05); i > 0; i--)
+                {
+                    IntVector2 position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    while(CheckCollisionOn(position, out temp))
+                    {
+                        position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    }
+                    
+                    Tree tree = new Tree(new Transform(position));
+                }
                 
-                Dog doggo = new Dog(new Transform(56, 3));
+                // 0.5% Zbiry
+                for(int i = (int) (Console.WindowWidth * Console.WindowHeight * 0.05); i > 0; i--)
+                {
+                    IntVector2 position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    while(CheckCollisionOn(position, out temp))
+                    {
+                        position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    }
+                    
+                    Bandit bandit = new Bandit(new Transform(position), position + new IntVector2(random.Next(-10, 111), random.Next(-10, 11)));
+                }
+
+                // 0.25% przedmioty
+                for(int i = (int) (Console.WindowWidth * Console.WindowHeight * 0.025); i > 0; i--)
+                {
+                    IntVector2 position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    while(CheckCollisionOn(position, out temp))
+                    {
+                        position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    }
+                    
+                    Item tresure;
+                    switch(Program.random.Next(4))
+                    {
+                        case 0:
+                        tresure = new Potion(new Transform(position));
+                        break;
+                        case 1:
+                        tresure = new Sword(new Transform(position));
+                        break;
+                        case 2:
+                        tresure = new Helmet(new Transform(position));
+                        break;
+                        case 3:
+                        tresure = new Trap(new Transform(position));
+                        break;
+                        default:
+                        break;
+                    }
+                }
+
+                // Pieski zapełnienia (1%)
+                for(int i = (int) (Console.WindowWidth * Console.WindowHeight * 0.01); i > 0; i--)
+                {
+                    IntVector2 position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    while(CheckCollisionOn(position, out temp))
+                    {
+                        position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    }
+                    
+                    Dog dog = new Dog(new Transform(position));
+                }
+
+                // teleporty 
+                for(int i = 4; i > 0; i--)
+                {
+                    IntVector2 position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    while(CheckCollisionOn(position, out temp))
+                    {
+                        position = new IntVector2(random.Next(Console.WindowWidth), random.Next(Console.WindowHeight));
+                    }
+                    
+                    // pozycja odbita względem punktu środka mapy
+                    IntVector2 altPosition = new IntVector2(Console.WindowWidth - position.x, Console.WindowHeight - position.y);
+
+                    Teleport teleport = new Teleport(new Transform(position), altPosition);
+                }
+
 
                 while(Program.player.hitpoints > 0)
                 {
@@ -136,3 +221,43 @@ namespace projekt // Note: actual namespace depends on the project name.
 
     }
 }
+
+
+/*  Coby nie zaginęło jakbym potrzebował - do wyczyszczenia później
+
+                Wall wall1 = new Wall(new Transform(10,3));
+
+                Bandit b1, b2, b3;
+                b1 = new Bandit(new Transform(14, 25), new IntVector2(14 + 5, 25 + 3));
+                b2 = new Bandit(new Transform(70, 25), new IntVector2(70 - 5, 25 -3));
+                b3 = new Bandit(new Transform(70, 3), new IntVector2(70, 13));
+
+                Dummie d1, d2, d3;
+                d1 = new Dummie(new Transform(14, 6));
+                d2 = new Dummie(new Transform(14, 7));
+                d3 = new Dummie(new Transform(14, 8));
+
+                Sword s1, s2, s3;
+                s1 = new Sword(new Transform(50, 6));
+                s2 = new Sword(new Transform(50, 7));
+                s3 = new Sword(new Transform(50, 8));
+
+                Helmet h1, h2, h3;
+                h1 = new Helmet(new Transform(52, 6));
+                h2 = new Helmet(new Transform(52, 7));
+                h3 = new Helmet(new Transform(52, 8));
+
+                Potion p1, p2, p3;
+                p1 = new Potion(new Transform(54, 6));
+                p2 = new Potion(new Transform(54, 7));
+                p3 = new Potion(new Transform(54, 8));
+
+                Trap t1, t2, t3;
+                t1 = new Trap(new Transform(56, 6));
+                t2 = new Trap(new Transform(56, 7));
+                t3 = new Trap(new Transform(56, 8));
+
+                Teleport teleport = new Teleport(new Transform((int)Console.WindowWidth/2, (int)Console.WindowHeight/2 - 1), new IntVector2(48, 6));
+                
+                Dog doggo = new Dog(new Transform(56, 3));
+*/

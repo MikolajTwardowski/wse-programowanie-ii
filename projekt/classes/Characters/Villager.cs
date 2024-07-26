@@ -5,7 +5,6 @@ namespace projekt
     class Villager : Character, IUpdatable
     {
         IntVector2 patrolingPoint;
-        Random r = new Random();
         public Villager(Transform transform, IntVector2 patrolingPoint) : base(transform)
         {
             isAggressive = false;
@@ -21,8 +20,8 @@ namespace projekt
 
         public void Update()
         {
-            int deltaX = patrolingPoint.x + r.Next(-2, 3) - transform.position.x;
-            int deltaY = patrolingPoint.y + r.Next(-2, 3) - transform.position.y;
+            int deltaX = patrolingPoint.x + Program.random.Next(-2, 3) - transform.position.x;
+            int deltaY = patrolingPoint.y + Program.random.Next(-2, 3) - transform.position.y;
 
             if(deltaX * deltaX > deltaY * deltaY)
             {

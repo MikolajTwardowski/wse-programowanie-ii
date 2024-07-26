@@ -18,8 +18,8 @@ namespace projekt
 
         public void Update()
         {
-            
-            TryMove(IntVector2.Down);
+            // idź w losowy kierunek, dopuszczalne skosy
+            TryMove(new IntVector2(Program.random.Next(-1,2),Program.random.Next(-1,2)));
         }
     }
 

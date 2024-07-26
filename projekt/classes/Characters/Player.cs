@@ -25,6 +25,20 @@ namespace projekt
             
             visual.SetVisualRepresentation('P');
             visual.SetForeground(ConsoleColor.White);
+            visual.SetBackground(ConsoleColor.DarkGray);
+        }
+
+        public override void Talk(Character character)
+        {
+            string speach = "Who is a good Boi? ^^";
+            Console.SetCursorPosition(transform.position.x - (int) (speach.Length / 2), transform.position.y - 1);
+            Console.ResetColor();
+            Console.Write(speach);
+            Console.ReadKey(true);
+            speach = "Wof wof!";
+            Console.SetCursorPosition(character.transform.position.x - (int) (speach.Length / 2), character.transform.position.y + 1);
+            Console.Write(speach);
+            Console.ReadKey(true);
         }
 
         protected override void OnCollisionEnter(GameObject other)
@@ -52,8 +66,15 @@ namespace projekt
                 transform.SetNewPosition(item.transform.position);
             }
 
+            if(other is Character character)
+            {
+                if(!character.isAggressive)
+                    Talk(character);
+            }
+
             base.OnCollisionEnter(other);
         }
+
         public void Update()
         {
             ConsoleKey playerInput = Console.ReadKey(true).Key;
@@ -79,7 +100,7 @@ namespace projekt
 
         public void DrawStatistics()
         {
-            Console.Write("HP {0}/{1}   Damage {2}   Defence {3}   Potions {4} (press \'H\' to use)", hitpoints, maxHitpoints, damage, defence, _potions);
+            Console.Write("HP {0}/{1}   Damage {2}   Defence {3}   Potions {4} )", hitpoints, maxHitpoints, damage, defence, _potions);
         }
     }
 }

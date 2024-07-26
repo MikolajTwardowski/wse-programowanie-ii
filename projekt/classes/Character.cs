@@ -16,7 +16,7 @@ namespace projekt
                 }
                 else
                 {
-                    visual.SetForeground(ConsoleColor.Green);
+                    visual.SetForeground(ConsoleColor.White);
                 }
                 _isAggressive = value;
             }
@@ -35,7 +35,7 @@ namespace projekt
                 _hitpoints = value;
                 if(_hitpoints <= 0)
                 {
-                    
+
                 }
             }
         }
@@ -43,27 +43,9 @@ namespace projekt
         public float damage{get; protected set;}
         public float defence{get; protected set;}
 
-
-        public Character() : base()
-        {
-            /*
-            this.isAggressive = true;
-            this.maxHitpoints = 3;
-            this._hitpoints = maxHitpoints;
-            this.damage = 1;
-            this.defence = 0;
-            */
-        }
-
         public Character(Transform transform) : base(transform)
         {
-            /*
-            this.isAggressive = true;
-            this.maxHitpoints = 3;
-            this._hitpoints = maxHitpoints;
-            this.damage = 1;
-            this.defence = 0;
-            */
+
         }
 
         public void Attack(Character character)
@@ -72,7 +54,7 @@ namespace projekt
                 character.hitpoints -= damage - character.defence;
         }
 
-        public void Talk(Character character)
+        public virtual void Talk(Character character)
         {
             Console.WriteLine("bla, bla, bla");
             Console.ReadKey(true);
@@ -104,10 +86,7 @@ namespace projekt
                     {
                         Attack(character);
                     }
-                    else
-                    {
-                        Talk(character);
-                    }
+
                 }
             }
             else if (other is Teleport teleport)

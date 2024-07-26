@@ -6,23 +6,39 @@ namespace projekt
 {
     class Bandit : Character, IUpdatable
     {
-        Random r = new Random();
         IntVector2 tresurePos;
         float detectionRange = 5;
 
         public Bandit(Transform transform, IntVector2 tresurePos) : base(transform)
         {
             isAggressive = true;
-            maxHitpoints = 10;
+            maxHitpoints = 5;
             hitpoints = maxHitpoints;
-            defence = 3;
-            damage = 4;
+            defence = Program.random.Next(4);
+            damage = Program.random.Next(4);
             
             visual.SetVisualRepresentation('B');
 
             this.tresurePos = tresurePos;
-
-            Item tresure = new Sword(new Transform(tresurePos));
+            
+            Item tresure;
+            switch(Program.random.Next(4))
+            {
+                case 0:
+                tresure = new Potion(new Transform(tresurePos));
+                break;
+                case 1:
+                tresure = new Sword(new Transform(tresurePos));
+                break;
+                case 2:
+                tresure = new Helmet(new Transform(tresurePos));
+                break;
+                case 3:
+                tresure = new Trap(new Transform(tresurePos));
+                break;
+                default:
+                break;
+            }
         }
 
         public void Update()
@@ -37,8 +53,8 @@ namespace projekt
             }
             else // kierunek w stronę skarbu
             {
-                deltaX = tresurePos.x + r.Next(-2, 3) - transform.position.x;
-                deltaY = tresurePos.y + r.Next(-2, 3) - transform.position.y;
+                deltaX = tresurePos.x + Program.random.Next(-2, 3) - transform.position.x;
+                deltaY = tresurePos.y + Program.random.Next(-2, 3) - transform.position.y;
             }
 
 
